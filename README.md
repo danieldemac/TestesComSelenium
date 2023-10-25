@@ -10,7 +10,7 @@ If you're new to Selenium or want to learn more about this project, you can star
 
 This repository is organized as follows:
 
-- `/InteraçãoComGoogle`: Contains sample Selenium scripts demonstrating various web automation tasks.
+- `/SeleniumTestes`: Contains sample Selenium scripts demonstrating various web automation tasks.
 - `README.md`: You're reading it! This document provides an overview of the repository.
 
 ## Prerequisites
