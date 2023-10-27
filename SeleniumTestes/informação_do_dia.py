@@ -6,8 +6,7 @@ from tkinter import messagebox, Text, Scrollbar
 
 # Lista de URLs de jornais
 urls = [
-    "https://www.diariodepernambuco.com.br/",
-    "https://www.folhape.com.br/"
+    "https://www.diariodepernambuco.com.br/"
 ]
 
 # Configurar o navegador Chrome

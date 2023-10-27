@@ -44,7 +44,7 @@ def run_tests():
         if response.status_code != 200:
             print_message(f"Erro no Teste 1: A página não está acessível (HTTP status code {response.status_code}).")
             return
-        print_message("Teste 1: A página está acessível.")
+        print_message(f"Teste 1: A página está acessível. {response.status_code} ")
        
         
 
@@ -95,44 +95,74 @@ def add_link_entry():
     link_entries.append(text_entry)
     url_entries.append(url_entry)
 
+    # Aumentar o tamanho da janela apenas verticalmente
+    window.update_idletasks()
+    new_height = window.winfo_reqheight() + 50
+    new_width = window.winfo_reqwidth()
+    window.geometry(f"{new_width}x{new_height}")
+
+# Função para remover um campo de entrada de link
+def remove_link_entry():
+    if link_entries:
+        text_entry = link_entries.pop()
+        url_entry = url_entries.pop()
+        text_entry.destroy()
+        url_entry.destroy()
+        # Diminuir o tamanho da janela apenas verticalmente
+        window.update_idletasks()
+        new_height = window.winfo_reqheight() - 50
+        new_width = window.winfo_reqwidth()
+        window.geometry(f"{new_width}x{new_height}")
+
 
 # Configurar a janela
 window = tk.Tk()
-window.title("Teste de Viabilidade de Site v.Beta - by Daniel Cabral ")
+window.title("Teste de Viabilidade de Site v.Beta - by Daniel Cabral")
+
+# Configuração do estilo da janela
+window.geometry("500x600")  
 
 # Adicionar campo de entrada para a URL
-url_label = tk.Label(window, text="URL do Site:")
-url_label.pack()
-url_entry = tk.Entry(window)
-url_entry.pack()
+url_label = tk.Label(window, text="URL do Site:", font=("Arial", 12))
+url_label.pack(pady=10)  # Espaçamento entre elementos
+
+url_entry = tk.Entry(window, width=40)
+url_entry.pack(padx=20, pady=5)  # Espaçamento nas laterais e superior
 
 # Adicionar caixa de seleção para testar links
 test_links = tk.IntVar()
-test_links_check = Checkbutton(window, text="Testar Links", variable=test_links)
-test_links_check.pack()
+test_links_check = Checkbutton(window, text="Testar Links", variable=test_links, font=("Arial", 12))
+test_links_check.pack(pady=10)
 
-# Adicionar botão para adicionar links
-add_link_button = tk.Button(window, text="Adicionar Link", command=add_link_entry)
-add_link_button.pack()
+# Adicionar botão para adicionar link (verde)
+add_link_button = tk.Button(window, text="Adicionar Link", command=add_link_entry, bg="green", fg="white")
+add_link_button.pack(pady=5)
+
+# Adicionar botão para remover link (vermelho)
+remove_link_button = tk.Button(window, text="Remover Link", command=remove_link_entry, bg="red", fg="white")
+remove_link_button.pack(pady=5)
 
 # Adicionar botão para executar os testes
-test_button = tk.Button(window, text="Executar Testes", command=lambda: threading.Thread(target=run_tests).start())
-test_button.pack()
+test_button = tk.Button(window, text="Executar Testes", command=lambda: threading.Thread(target=run_tests).start(), font=("Arial", 14), bg="green", fg="white")
+test_button.pack(pady=20)
 
 # Adicionar widget de texto para exibir o resultado
-result_text = scrolledtext.ScrolledText(window, state='disabled', wrap=tk.WORD, height=10, width=40)
-result_text.pack()
+result_text = scrolledtext.ScrolledText(window, state='disabled', wrap=tk.WORD, height=20, width=50, font=("Courier", 12), bg="black", fg="green")
+result_text.pack(padx=20, pady=10)  # Espaçamento nas laterais e superior
+
+# Configurar a tag para o estilo desejado
+result_text.tag_config("matrix", foreground="green")
+
+# Função para imprimir mensagens na janela com a tag "matrix"
+def print_message(message):
+    result_text.configure(state='normal')
+    result_text.insert(tk.END, message + "\n", "matrix")
+    result_text.see(tk.END)
+    result_text.configure(state='disabled')
 
 # Lista para armazenar os campos de entrada de links
 link_entries = []
 url_entries = []
-
-# Lista para armazenar as verificações de elementos
-element_checks = []
-
-# Lista para armazenar os campos de entrada de seletores
-by_entries = []
-value_entries = []
 
 # Iniciar a janela
 window.mainloop()
