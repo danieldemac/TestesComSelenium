@@ -27,10 +27,11 @@ def run_tests():
 
     # Verificar se a URL é válida
     if not is_valid_url(url):
-        print_message("URL inválida. Certifique-se de que a URL começa com 'http://' ou 'https://'.")
+        print_message("-URL inválida. Certifique-se de que a URL começa com 'http://' ou 'https://'.")
+        print_message('x-----------------END-----------------x')
         return
 
-    print_message("Iniciando testes...")
+    print_message("-Iniciando testes...")
 
     # Configurar o navegador Chrome
     driver = webdriver.Chrome()
@@ -39,18 +40,18 @@ def run_tests():
 
     try:
         # Teste 1: Verificar se a página está acessível (status HTTP 200)
-        print_message("Iniciando Teste 1: Verificando acessibilidade da página...")
+        print_message("-Iniciando Teste 1: Verificando acessibilidade da página...")
         response = requests.head(url)
         if response.status_code != 200:
-            print_message(f"Erro no Teste 1: A página não está acessível (HTTP status code {response.status_code}).")
+            print_message(f"-Erro no Teste 1: A página não está acessível (HTTP status code {response.status_code}).")
             return
-        print_message(f"Teste 1: A página está acessível. {response.status_code} ")
+        print_message(f"-Teste 1: A página está acessível. {response.status_code}OK")
        
         
 
         # Teste 2: Verificar a funcionalidade de links (se a caixa de seleção estiver marcada)
         if test_links.get() == 1:
-            print_message("Iniciando Teste 2: Verificando funcionalidade de links...")
+            print_message("-Iniciando Teste 2: Verificando funcionalidade de links...")
             links_to_check = []
 
             # Lê os links adicionados pelo usuário
@@ -65,24 +66,25 @@ def run_tests():
                     link_url = link.get_attribute("href")
 
                     if link_url != link_info["url"]:
-                        print_message(f"Erro no Teste 2: O link '{link_info['text']}' redireciona para '{link_url}' em vez de '{link_info['url']}'.")
+                        print_message(f"-Erro no Teste 2: O link '{link_info['text']}' redireciona para '{link_url}' em vez de '{link_info['url']}'.")
                         return
-                    print_message(f"Teste 2: Link '{link_info['text']}' redireciona corretamente.")
+                    print_message(f"-Teste 2: Link '{link_info['text']}' redireciona corretamente.")
                 except NoSuchElementException:
-                    print_message(f"Teste 2: Link '{link_info['text']}' não encontrado na página.")
+                    print_message(f"-Teste 2: Link '{link_info['text']}' não encontrado na página.")
 
         # Teste 4: Outros testes específicos, como preencher um formulário, clicar em botões, etc.
 
     except AssertionError as e:
         print_message(e)
     except TimeoutException:
-        print_message("Erro: Tempo limite excedido ao carregar a página.")
+        print_message("-Erro: Tempo limite excedido ao carregar a página.")
     except requests.exceptions.RequestException as e:
-        print_message("Erro: Não foi possível acessar a página. Verifique a URL e sua conexão com a internet.")
+        print_message("-Erro: Não foi possível acessar a página. Verifique a URL e sua conexão com a internet.")
     finally:
         driver.quit()
 
-        print_message("Testes concluídos.")
+        print_message("-Testes concluídos.")
+        print_message('x-----------------END-----------------x')
 
 # Função para adicionar um campo de entrada de link
 def add_link_entry():
