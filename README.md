@@ -1,4 +1,4 @@
-# Selenium Learning Repository
+# Selenium Learning Repository 💻
 
 Welcome to my Selenium learning repository! In this project, I'm exploring Selenium, a powerful tool for automating web interactions. This repository serves as a place where I document my progress, store code samples, and share my knowledge about Selenium.
 
@@ -26,3 +26,5 @@ Before you can use Selenium, make sure you have the following installed:
 
 ```bash
 git clone https://github.com/danieldemac/TestesComSelenium.git
+
+
