@@ -1,5 +1,7 @@
 # Selenium Learning Repository 💻
 
+<img align="center" alt="Dan-Selen" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" />
+
 Welcome to my Selenium learning repository! In this project, I'm exploring Selenium, a powerful tool for automating web interactions. This repository serves as a place where I document my progress, store code samples, and share my knowledge about Selenium.
 
 ## Getting Started
